@@ -59,7 +59,7 @@ class LesseeImg(models.Model):
 
 class RentalConditions(models.Model):
     car = models.ForeignKey(Cars, on_delete=models.CASCADE)
-    lessee = models.ForeignKey(CarsLessee)
+    lessee = models.ForeignKey(CarsLessee,on_delete=models.CASCADE)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     starting_price = models.CharField(max_length=256)

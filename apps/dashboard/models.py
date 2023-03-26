@@ -54,25 +54,28 @@ class CarsLessee(models.Model):
 class LesseeImg(models.Model):
     lessee = models.ForeignKey(CarsLessee, on_delete=models.CASCADE)
     img = models.ImageField()
+
     def __str__(self):
         return f"{self.lessee.name}"
 
+
 class RentalConditions(models.Model):
     car = models.ForeignKey(Cars, on_delete=models.CASCADE)
-    lessee = models.ForeignKey(CarsLessee,on_delete=models.CASCADE)
+    lessee = models.ForeignKey(CarsLessee, on_delete=models.CASCADE)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     starting_price = models.CharField(max_length=256)
     monthly_payment = models.CharField(max_length=258)
+
     def __str__(self):
         return f"{self.car.name},{self.lessee.name}"
 
 
 class MonthlyPayment(models.Model):
-    rental = models.ForeignKey(RentalConditions,on_delete=models.CASCADE)
-    lessee = models.ForeignKey(CarsLessee,on_delete=models.CASCADE)
+    rental = models.ForeignKey(RentalConditions, on_delete=models.CASCADE)
+    lessee = models.ForeignKey(CarsLessee, on_delete=models.CASCADE)
     month = models.DateTimeField()
     month_payment = models.CharField(max_length=256)
+
     def __str__(self):
         return f"{self.lessee.name},{self.month},{self.month_payment}"
-

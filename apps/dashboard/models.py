@@ -39,13 +39,16 @@ class CarImg(models.Model):
 
 
 class CarsLessee(models.Model):
-    lessee_first_name = models.CharField(max_length=128)
-    lessee_last_name = models.CharField(max_length=128)
-    lessee_passport_seria = models.CharField(max_length=128)
-    lessee_birth_date = models.CharField(max_length=128, blank=True, null=True)
-    lessee_phone_one = models.CharField(max_length=128)
-    lessee_phone_two = models.CharField(max_length=128, blank=True, null=True)
-    lessee_adress = models.TextField()
+    car = models.ForeignKey(Cars, on_delete=models.CASCADE)
+    lessee_first_name = models.CharField('Ijarachi Ismi',max_length=128)
+    lessee_last_name = models.CharField('Ijarachi Familiyasi',max_length=128)
+    lessee_passport_seria = models.CharField('Passport raqami',max_length=128)
+    lessee_phone_one = models.CharField('Assosiy telefon',max_length=128)
+    lessee_phone_two = models.CharField("Qo'shimcha telefon",max_length=128, blank=True, null=True)
+    start_date = models.DateField(auto_now=False)
+    end_date = models.DateField(auto_now=False)
+    starting_price = models.CharField('Boshlangich summa',max_length=256)
+    monthly_payment = models.CharField('Oylik tulov',max_length=258)
 
     def __str__(self):
         return f"{self.lessee_first_name},{self.lessee_last_name},{self.lessee_phone_two}"
@@ -59,20 +62,9 @@ class LesseeImg(models.Model):
         return f"{self.lessee.name}"
 
 
-class RentalConditions(models.Model):
-    car = models.ForeignKey(Cars, on_delete=models.CASCADE)
-    lessee = models.ForeignKey(CarsLessee, on_delete=models.CASCADE)
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
-    starting_price = models.CharField(max_length=256)
-    monthly_payment = models.CharField(max_length=258)
-
-    def __str__(self):
-        return f"{self.car.name},{self.lessee.name}"
 
 
 class MonthlyPayment(models.Model):
-    rental = models.ForeignKey(RentalConditions, on_delete=models.CASCADE)
     lessee = models.ForeignKey(CarsLessee, on_delete=models.CASCADE)
     month = models.DateTimeField()
     month_payment = models.CharField(max_length=256)

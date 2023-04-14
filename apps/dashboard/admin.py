@@ -9,5 +9,4 @@ from apps.dashboard.models import *
 admin.site.register(BotUser)
 admin.site.register(Cars)
 admin.site.register(CarsLessee)
-admin.site.register(RentalConditions)
 admin.site.register(MonthlyPayment)

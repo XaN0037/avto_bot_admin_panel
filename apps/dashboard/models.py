@@ -70,3 +70,4 @@ class MonthlyPayment(models.Model):
 
     def __str__(self):
         return f"{self.lessee.name},{self.month},{self.month_payment}"
+

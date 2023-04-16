@@ -12,6 +12,7 @@ class BotUser(models.Model):
     is_bot = models.BooleanField(default=False)
     steep = models.CharField(max_length=128, blank=True, null=True)
     last_query = models.TextField(blank=True, null=True)
+    inline_log = models.JSONField(default={}, null=True)
 
     def __str__(self):
         return f"{self.tg_id} , {self.first_name},{self.user_name},{self.last_name},{self.is_bot}"
@@ -60,8 +61,6 @@ class LesseeImg(models.Model):
 
     def __str__(self):
         return f"{self.lessee.name}"
-
-
 
 
 class MonthlyPayment(models.Model):

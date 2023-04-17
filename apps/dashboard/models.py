@@ -12,7 +12,7 @@ class BotUser(models.Model):
     is_bot = models.BooleanField(default=False)
     steep = models.CharField(max_length=128, blank=True, null=True)
     last_query = models.TextField(blank=True, null=True)
-    inline_log = models.JSONField(default={}, null=True)
+    inline_page = models.CharField(max_length=32)
 
     def __str__(self):
         return f"{self.tg_id} , {self.first_name},{self.user_name},{self.last_name},{self.is_bot}"
@@ -20,8 +20,8 @@ class BotUser(models.Model):
 
 class Cars(models.Model):
     car_name = models.CharField(max_length=128)
-    car_number = models.CharField(max_length=128)
-    tex_passport_number = models.CharField(max_length=128)
+    car_number = models.CharField(max_length=128, unique=True)
+    tex_passport_number = models.CharField(max_length=128, unique=True)
     year = models.CharField(max_length=128, null=True, blank=True)
     car_color = models.CharField(max_length=128, null=True, blank=True)
     car_transmission = models.CharField(max_length=128, null=True, blank=True)
